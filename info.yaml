@@ -1,9 +1,9 @@
 # Tiny Tapeout project information
 project:
   title:        ECE 210 Submission
-  author:       ""      Mimi Rapoport
-  discord:      ""      Rapoport-Mimi
-  description:  ""      Project Submission
+  author:       Mimi Rapoport
+  discord:      Rapoport-Mimi
+  description:  Project Submission
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
