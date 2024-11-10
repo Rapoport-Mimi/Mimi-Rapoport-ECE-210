@@ -15,7 +15,7 @@ async def test_project(dut):
     # Generate a random value for input
     
 
-    clock = Clock(dut.clk, units="ns")
+    clock = Clock(dut.clk, period = 10, units="ns")
     cocotb.start_soon(clock.start())
 
     # Reset
