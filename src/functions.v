@@ -8,7 +8,7 @@ module perceptron (
     input wire  [7:0]   in3,
     output reg  [0:0]   out,
     output reg  [0:0]   desired_out
-)
+);
 
     reg    [7:0]   threshold;
     reg    [15:0]   we1;
