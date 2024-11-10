@@ -29,9 +29,9 @@ module perceptron (
             out <= (weighted >= threshold);
 
             if (out != desired_out) begin
-                we1 <= we1 + ((desired_out - out) * in1) / LEARNING_RATE_MULT_INV_FIRST_SECOND;
-                we2 <= we2 + ((desired_out - out) * in2) / LEARNING_RATE_MULT_INV_FIRST_SECOND; 
-                we3 <= we3 + ((desired_out - out) * in3) / LEARNING_RATE_MULT_INV_FIRST_SECOND;
+                we1 <= we1 + ((desired_out - out) * in1) / LEARNING_RATE_MULT_INV;
+                we2 <= we2 + ((desired_out - out) * in2) / LEARNING_RATE_MULT_INV; 
+                we3 <= we3 + ((desired_out - out) * in3) / LEARNING_RATE_MULT_INV;
             end
         end
     end
