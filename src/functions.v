@@ -10,7 +10,7 @@ module perceptron (
     output reg  [0:0]   desired_out
 );
 
-    reg    [7:0]   threshold;
+    reg    [15:0]   threshold;
     reg    [15:0]   we1;
     reg    [15:0]   we2;
     reg    [15:0]   we3;
