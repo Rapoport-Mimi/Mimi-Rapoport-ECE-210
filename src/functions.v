@@ -11,9 +11,9 @@ module perceptron (
 );
 
     reg    [15:0]   threshold;
-    reg    [3:0]   we1_mult_inv;
-    reg    [3:0]   we2_mult_inv;
-    reg    [6:0]   we3_mult_inv;
+    reg    [3:0]   we1;
+    reg    [3:0]   we2;
+    reg    [6:0]   we3;
     wire   [15:0]   weighted;
     parameter LEARNING_RATE_MULT_INV = 16'd10;
 
@@ -21,17 +21,17 @@ module perceptron (
         if (!reset) begin
             out <= 0;
             threshold <= 16'd200; 
-            we1_mult_inv <= 4'd10;       
-            we2_mult_inv <= 4'd20;       
-            we3_mult_inv <= 6'd30; 
+            we1 <= 4'd10;       
+            we2 <= 4'd20;       
+            we3 <= 7'd30; 
         end
         else begin
             out <= (weighted >= threshold);
 
             if (out != desired_out) begin
-                we1_mult_inv <= 1 / ( (1 / we1_mult_inv) + (desired_out - out) * in1 / LEARNING_RATE_MULT_INV );
-                we2_mult_inv <= 1 / ( (1 / we2_mult_inv) + (desired_out - out) * in2 / LEARNING_RATE_MULT_INV ); 
-                we3_mult_inv <= 1 / ( (1 / we3_mult_inv) + (desired_out - out) * in3 / LEARNING_RATE_MULT_INV );
+                we1 <= we1 + ((desired_out - out) * in1) / LEARNING_RATE_MULT_INV;
+                we2 <= we2 + ((desired_out - out) * in2) / LEARNING_RATE_MULT_INV; 
+                we3 <= we3 + ((desired_out - out) * in3) / LEARNING_RATE_MULT_INV;
             end
         end
     end

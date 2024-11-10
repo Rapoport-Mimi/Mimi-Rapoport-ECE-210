@@ -30,7 +30,7 @@ module tt_um_Rapoport (
     .in1(ui_in[3:0]), 
     .in2(ui_in[7:4]), 
     .in3(uio_in[6:0]), 
-    .desired_out(ui_in[7]), 
+    .desired_out(uio_in[7]), 
     .out(uio_out[7])
   );
 
