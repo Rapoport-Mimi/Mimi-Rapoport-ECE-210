@@ -9,11 +9,11 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-The perceptron takes inputs and does stuff
+The perceptron takes in three inputs, multiplies them by weights and then sums the products. It then weighs the sum against a threshold to decide whether to outpur 1 or 0. The perceptron also takes in a desired output and performs a weight update when the desired output and actual output don't match. . 
 
 ## How to test
 
-See if it works
+Make sure that the clock is working.
 
 ## External hardware
 
