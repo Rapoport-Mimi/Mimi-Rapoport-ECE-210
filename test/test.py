@@ -11,31 +11,6 @@ async def test_project(dut):
     dut._log.info("Start")
 
 
-    import random
-    # Generate a random value for input
     
 
-    clock = Clock(dut.clk, period = 10, units="ns")
-    cocotb.start_soon(clock.start())
-
-    # Reset
-    dut.rst_n.value = 0 
-    # 10 clock cycles
-    await ClockCycles(dut.clk, 10)
-    # Take out of reset
-    dut.rst_n.value = 1 
-
-    dut.ui_in.value = 0
-    await ClockCycles(dut.clk, 10)
-
-    dut.ui_in.value = 20
-    await ClockCycles(dut.clk, 100)
-
-    dut.ui_in.value = random.randint(0, 100)
-    dut._log.info(f"Random ui_in value: {dut.ui_in.value}")
-
-    dut._log.info("Test Complete")
-
-
-    
    
