@@ -13,8 +13,7 @@ async def test_project(dut):
 
     import random
     # Generate a random value for input
-    dut.ui_in.value = random.randint(0, 100)
-    dut._log.info(f"Random ui_in value: {dut.ui_in.value}")
+    
 
     clock = Clock(dut.clk, units="ns")
     cocotb.start_soon(clock.start())
@@ -31,6 +30,9 @@ async def test_project(dut):
 
     dut.ui_in.value = 20
     await ClockCycles(dut.clk, 100)
+
+    dut.ui_in.value = random.randint(0, 100)
+    dut._log.info(f"Random ui_in value: {dut.ui_in.value}")
 
     dut._log.info("Test Complete")
 
