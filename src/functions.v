@@ -26,17 +26,19 @@ module perceptron (
             we3 <= 16'd30; 
         end
         else begin
-            out <= (weighted >= threshold);
 
+            out <= (weighted >= threshold);
+            
+            // Weight updates
             if (out != desired_out) begin
-                we1 <= we1 + ((({15'b0, desired_out} - {15'b0, out}) * in1) / LEARNING_RATE_MULT_INV);
-                we2 <= we2 + ((({15'b0, desired_out} - {15'b0, out}) * in2) / LEARNING_RATE_MULT_INV); 
-                we3 <= we3 + ((({15'b0, desired_out} - {15'b0, out}) * in3) / LEARNING_RATE_MULT_INV);
+                we1 <= we1 + ((desired_out - out) * in1) / LEARNING_RATE_MULT_INV;
+                we2 <= we2 + ((desired_out - out) * in2) / LEARNING_RATE_MULT_INV;
+                we3 <= we3 + ((desired_out - out) * in3) / LEARNING_RATE_MULT_INV;
             end
         end
     end
 
-    // summation logic
+    // Summation logic
     assign weighted = in1 * we1 + in2 * we2 + in3 * we3; 
 
 endmodule
