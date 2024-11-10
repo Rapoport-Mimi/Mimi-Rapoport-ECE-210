@@ -11,11 +11,12 @@ module perceptron (
 );
 
     reg    [15:0]   threshold;
-    reg    [3:0]   we1;
-    reg    [3:0]   we2;
-    reg    [6:0]   we3;
+    reg    [15:0]   we1;
+    reg    [15:0]   we2;
+    reg    [15:0]   we3;
     wire   [15:0]   weighted;
     parameter LEARNING_RATE_MULT_INV_FIRST_SECOND = 4'd10;
+    parameter LEARNING_RATE_MULT_INV_THIRD = 4'd10;
 
     always @(posedge clk or negedge reset) begin
         if (!reset) begin
