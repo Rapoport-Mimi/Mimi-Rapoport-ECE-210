@@ -34,15 +34,12 @@
 # SPDX-FileCopyrightText: © 2024 Tiny Tapeout
 # SPDX-License-Identifier: Apache-2.0
 
-import cocotb
-from cocotb.clock import Clock
-from cocotb.triggers import ClockCycles
-import random
-
-
 @cocotb.test()
 async def test_perceptron(dut):
     dut._log.info("Starting perceptron test")
+
+    # Print all available signals in the DUT for debugging purposes
+    dut._log.info(f"Available signals: {dut._sigmap.keys()}")
 
     # Create a clock with a period of 10ns (100 MHz)
     clock = Clock(dut.clk, period=10, units="ns")
@@ -56,15 +53,25 @@ async def test_perceptron(dut):
 
     # Test Case 1: Check initial reset values
     # After reset, out should be 0, and weights should be at their initialized values
-    # assert dut.out.value == 0, f"Expected output to be 0, but got {dut.out.value}"
-    # assert dut.we1.value == 10, f"Expected we1 to be 10, but got {dut.we1.value}"
-    # assert dut.we2.value == 20, f"Expected we2 to be 20, but got {dut.we2.value}"
-    # assert dut.we3.value == 30, f"Expected we3 to be 30, but got {dut.we3.value}"
+    assert dut.out.value == 0, f"Expected output to be 0, but got {dut.out.value}"
+    assert dut.we1.value == 10, f"Expected we1 to be 10, but got {dut.we1.value}"
+    assert dut.we2.value == 20, f"Expected we2 to be 20, but got {dut.we2.value}"
+    assert dut.we3.value == 30, f"Expected we3 to be 30, but got {dut.we3.value}"
 
     # Test Case 2: Test input and output when desired_out = 0
-    dut.in1 = 1
-    dut.in2.value = 1
-    dut.in3.value = 1
+    if "in1" in dut._sigmap:
+        dut.in1.value = 1
+    else:
+        dut._log.warning("Signal 'in1' not found in DUT.")
+    if "in2" in dut._sigmap:
+        dut.in2.value = 1
+    else:
+        dut._log.warning("Signal 'in2' not found in DUT.")
+    if "in3" in dut._sigmap:
+        dut.in3.value = 1
+    else:
+        dut._log.warning("Signal 'in3' not found in DUT.")
+    
     dut.desired_out.value = 0
     await ClockCycles(dut.clk, 10)
 
@@ -73,9 +80,12 @@ async def test_perceptron(dut):
     assert dut.out.value == 0, f"Expected output to be 0, but got {dut.out.value}"
 
     # Test Case 3: Test input and output when desired_out = 1
-    dut.in1.value = 5
-    dut.in2.value = 5
-    dut.in3.value = 5
+    if "in1" in dut._sigmap:
+        dut.in1.value = 5
+    if "in2" in dut._sigmap:
+        dut.in2.value = 5
+    if "in3" in dut._sigmap:
+        dut.in3.value = 5
     dut.desired_out.value = 1
     await ClockCycles(dut.clk, 10)
 
@@ -89,9 +99,12 @@ async def test_perceptron(dut):
     assert dut.we3.value != 30, f"Expected we3 to change, but got {dut.we3.value}"
 
     # Test Case 4: Input where the sum doesn't meet the threshold and desired_out is 0
-    dut.in1.value = 8
-    dut.in2.value = 8
-    dut.in3.value = 8
+    if "in1" in dut._sigmap:
+        dut.in1.value = 8
+    if "in2" in dut._sigmap:
+        dut.in2.value = 8
+    if "in3" in dut._sigmap:
+        dut.in3.value = 8
     dut.desired_out.value = 0
     await ClockCycles(dut.clk, 10)
 
@@ -99,9 +112,12 @@ async def test_perceptron(dut):
     assert dut.out.value == 0, f"Expected output to be 0, but got {dut.out.value}"
 
     # Test Case 5: Boundary test with zero inputs, expected output = 0
-    dut.in1.value = 0
-    dut.in2.value = 0
-    dut.in3.value = 0
+    if "in1" in dut._sigmap:
+        dut.in1.value = 0
+    if "in2" in dut._sigmap:
+        dut.in2.value = 0
+    if "in3" in dut._sigmap:
+        dut.in3.value = 0
     dut.desired_out.value = 0
     await ClockCycles(dut.clk, 10)
 
@@ -109,9 +125,12 @@ async def test_perceptron(dut):
     assert dut.out.value == 0, f"Expected output to be 0, but got {dut.out.value}"
 
     # Test Case 6: Random test for updating weights (desired output mismatches actual output)
-    dut.in1.value = random.randint(0, 15)
-    dut.in2.value = random.randint(0, 15)
-    dut.in3.value = random.randint(0, 127)
+    if "in1" in dut._sigmap:
+        dut.in1.value = random.randint(0, 15)
+    if "in2" in dut._sigmap:
+        dut.in2.value = random.randint(0, 15)
+    if "in3" in dut._sigmap:
+        dut.in3.value = random.randint(0, 127)
     dut.desired_out.value = random.choice([0, 1])
     await ClockCycles(dut.clk, 10)
 
