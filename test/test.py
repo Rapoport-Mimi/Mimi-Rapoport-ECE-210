@@ -62,7 +62,7 @@ async def test_perceptron(dut):
     # assert dut.we3.value == 30, f"Expected we3 to be 30, but got {dut.we3.value}"
 
     # Test Case 2: Test input and output when desired_out = 0
-    dut.in1.value = 1
+    dut.in1 = 1
     dut.in2.value = 1
     dut.in3.value = 1
     dut.desired_out.value = 0
