@@ -15,7 +15,7 @@ module perceptron (
     reg    [15:0]   we2;
     reg    [15:0]   we3;
     wire   [15:0]   weighted;
-    // parameter LEARNING_RATE_MULT_INV = 16'd10;
+    parameter LEARNING_RATE_MULT_INV = 16'd10;
 
     always @(posedge clk or negedge reset) begin
         if (!reset) begin
@@ -31,9 +31,9 @@ module perceptron (
             
             // Weight updates
             if (out != desired_out) begin
-                we1 <= we1 + ((({15'b0, desired_out} - {15'b0, out}) * in1) );
-                we2 <= we2 + ((({15'b0, desired_out} - {15'b0, out}) * in2) ); 
-                we3 <= we3 + ((({15'b0, desired_out} - {15'b0, out}) * in3) );
+                we1 <= we1 + ((({15'b0, desired_out} - {15'b0, out}) * in1) / LEARNING_RATE_MULT_INV);
+                we2 <= we2 + ((({15'b0, desired_out} - {15'b0, out}) * in2) / LEARNING_RATE_MULT_INV); 
+                we3 <= we3 + ((({15'b0, desired_out} - {15'b0, out}) * in3) / LEARNING_RATE_MULT_INV);
             end
         end
     end
