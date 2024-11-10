@@ -14,13 +14,13 @@ module perceptron (
     reg    [15:0]   we1;
     reg    [15:0]   we2;
     reg    [15:0]   we3;
-    wire   [31:0]   weighted;
+    wire   [15:0]   weighted;
     parameter LEARNING_RATE_MULT_INV = 16'd10;
 
     always @(posedge clk or negedge reset) begin
         if (!reset) begin
             out <= 0;
-            threshold <= 16'd200; 
+            threshold <= 16'd50; 
             we1 <= 16'd10;       
             we2 <= 16'd20;       
             we3 <= 16'd30; 
