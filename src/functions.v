@@ -37,6 +37,6 @@ module perceptron (
     end
 
     // summation logic
-    assign weighted = in1 / we1_mult_inv + in2 / we2_mult_inv + in3 / we3_mult_inv; 
+    assign weighted = in1 * we1 + in2 * we2 + in3 * we3; 
 
 endmodule
