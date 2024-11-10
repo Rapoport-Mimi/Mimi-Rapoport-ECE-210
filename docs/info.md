@@ -13,7 +13,7 @@ The perceptron takes in three inputs, multiplies them by weights and then sums t
 
 ## How to test
 
-Make sure that the clock is working.
+Make sure that the clock and reset are working.
 
 ## External hardware
 
