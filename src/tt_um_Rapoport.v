@@ -18,6 +18,7 @@ module tt_um_Rapoport (
 
   // All output pins must be assigned. If not used, assign to 0.
   assign uio_out[6:0] = 0;
+  assign uio_in[6:4] = 0
   assign uio_oe = 0;
   assign uo_out = 0;
 
@@ -30,7 +31,7 @@ module tt_um_Rapoport (
     .reset(rst_n), 
     .in1(ui_in[3:0]), 
     .in2(ui_in[7:4]), 
-    .in3(uio_in[6:0]), 
+    .in3(uio_in[3:0]), 
     .desired_out(uio_in[7]), 
     .out(uio_out[7])
   );
