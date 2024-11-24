@@ -15,7 +15,7 @@ module perceptron (
     reg    [3:0]   we2;
     reg    [3:0]   we3;
     wire   [3:0]   weighted;
-    parameter LEARNING_RATE_MULT_INV = 16'd10;
+    parameter LEARNING_RATE_MULT_INV = 4'd10;
 
     always @(posedge clk or negedge reset) begin
         if (!reset) begin
